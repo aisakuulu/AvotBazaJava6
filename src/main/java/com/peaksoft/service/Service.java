@@ -17,9 +17,9 @@ public class Service {
             driver.setTruck(truck.getName());
             System.out.println("The truck " + truck.getName() + "'s driver is: " + driver.getName());
         } else if (truck.getState().equals(State.ROUTE)) {
-            throw new ChangeDriverException("The driver on the road. You cannot change this driver");
-        } else if (truck.getState().equals(State.REPAIR)){
-            throw new ChangeDriverException("The truck in repair. You cannot change the driver");
+            System.err.println("The driver is on the road. You can not change this driver!");
+        } else if (truck.getState().equals(State.REPAIR)) {
+            System.err.println("The Truck is on repair, You can not change driver!");
         }
     }
 
@@ -30,31 +30,23 @@ public class Service {
                 truck.setState(State.ROUTE);
                 System.out.println("The Truck has successfully get started");
             } else {
-                System.out.println("There is no any driver");
+                System.err.println("There is no any driver");
             }
         }
         else if (truck.getState().equals(State.ROUTE)) {
-            throw new TruckStateException("The truck is on the road!");
+            System.err.println("The truck is already on the road!");
         }
         else if (truck.getState().equals(State.REPAIR)) {
-//            Random random = new Random();
-////            int a = random.nextInt(1,3);
-//
-//            if (a == 1){
-//                truck.setState(State.ROUTE);
-//            } else {
-//                truck.setState(State.BASE);
-//            }
-            System.out.println("The trucks state is: " + truck.getState());
+            System.err.println("The truck is on repair, you can not drive the truck!");
         }
     }
 
     public void startRepairing(Truck truck, Driver driver) {
         if (truck.getState().equals(State.BASE) || truck.getState().equals(State.ROUTE)) {
             truck.setState(State.REPAIR);
-            System.out.println("The Truck is in repair");
+            System.out.println("The Truck has successfully send to repair!");
         } else if (truck.getState().equals(State.REPAIR)){
-            throw new TruckStateException("This truc is already in repair!");
+            System.err.println("This truck is already in repair!");
         }
     }
 }
